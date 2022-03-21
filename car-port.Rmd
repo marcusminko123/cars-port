@@ -1,0 +1,43 @@
+---
+title: "cars"
+author: "Marcus Minko"
+date: "3/21/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r cars}
+library(tidyverse)
+summary(cars)
+
+#plot
+
+cars %>% 
+  ggplot(aes(x = speed, y = dist)) + geom_point()
+
+#Correlate
+cars %>% 
+summarize(r = cor(speed, dist))
+
+#Linear Regression and Plot
+lm_speed_dist <- lm(formula = dist ~ speed, data = cars)
+summary(lm_speed_dist)
+
+#distance = -17.58 + (3.93)(speed)
+
+cars %>% 
+  ggplot(aes(x = speed, y = dist)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+
+#LM plot with standard error lines
+
+cars %>% 
+  ggplot(aes(x = speed, y = dist)) + geom_point() + geom_smooth(method = "lm")
+
+```
+
+
